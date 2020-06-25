@@ -6,4 +6,4 @@ client.on('ready', () => {
   console.log('Booted Up!')}
   
 //Token.
-client.login(process.env.TOKEN)
+client.login(${{secrets.TOKEN}})
