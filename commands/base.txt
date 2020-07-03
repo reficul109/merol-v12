@@ -1,0 +1,17 @@
+module.exports = {
+	name: 'NAME',
+  args: 0 - 3,
+  imgreq: BOOLEAN,
+  ARA: BOOLEAN,
+  guild: BOOLEAN,
+  admin: BOOLEAN,
+  lock: 0 - 2,
+  keyreq: INT,
+  keydes: INT,
+  use: 'USAGE',
+  thumbs: BOOLEAN,
+	execute(client, message, args, msgAtt, embed, embed2, db, a, f, v) {}}
+
+  REQUIRED: NAME, ARGS.
+  REQUIRED WITH ARGS > 0: USE.
+  REQUIRED WITH ADMIN: GUILD

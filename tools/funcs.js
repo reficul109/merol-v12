@@ -1,0 +1,1 @@
+module.exports.randomObj = function(array) {return array[Math.floor(Math.random() * array.length)]}

@@ -1,3 +1,4 @@
+{
   "name": "botmerol",
   "version": "1.0.9",
   "description": "Merol will try to enlighten you.",
@@ -11,7 +12,7 @@
   "author": "Reficul",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^11.6.1",
+    "discord.js": "^12.2.0",
     "@discordjs/opus": "^0.1.0",
     "express": "^4.17.1",
     "sqlite3": "^4.2.0",
