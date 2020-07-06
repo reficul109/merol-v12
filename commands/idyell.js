@@ -4,9 +4,9 @@ module.exports = {
   ARA: true,
   use: 'idyell <channelID> <text>',
   thumbs: true,
-	execute(client, message, args, msgAtt, embed, embed2, db, a, f, v) {
-    var argresult2 = args.slice(2).join(' ')
-    var chann = client.channels.cache.get(args[1])
+	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
+    var argresult2 = message.args.slice(2).join(' ')
+    var chann = client.channels.cache.get(message.args[1])
     if (!chann) {
       return message.react('❌')}
     chann.startTyping()

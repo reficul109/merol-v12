@@ -10,7 +10,7 @@ module.exports = {
   keydes: INT,
   use: 'USAGE',
   thumbs: BOOLEAN,
-	execute(client, message, args, msgAtt, embed, embed2, db, a, f, v) {}}
+	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {}}
 
   REQUIRED: NAME, ARGS.
   REQUIRED WITH ARGS > 0: USE.

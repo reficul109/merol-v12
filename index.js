@@ -20,6 +20,7 @@ const client = new Discord.Client({presence: {status: 'online', activity: {name:
 const db = require('better-sqlite3')('./assets/data.db')
 client.userDB = db.prepare('SELECT * FROM userData WHERE userID = ?')
 client.srvrDB = db.prepare('SELECT * FROM srvrData WHERE serverID = ?')
+client.cKeys = db.prepare("UPDATE userData SET keys = ? WHERE userID = ?")
 
 //Command Getter
 client.commands = new Discord.Collection()
@@ -51,21 +52,25 @@ client.on('guildDelete', guild => {
 //Messages
 client.on('message', message => {
 
+  //Shorcuts
+  var origin = message.channel, caller = message.author
+
   //Only Users
-  if (message.author.bot || message.system) return;
+  if (caller.bot || message.system) return;
 
   //New User Catcher
-  if (!client.userDB.get(message.author.id)) {
+  if (!client.userDB.get(caller.id)) {
     client.newRow = db.prepare('INSERT INTO userData (userID, getKeys, keys, udexText, udexImg, getReact, customReact, blockDM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
-    client.newRow.run(message.author.id, 'Y', 0, 'None', 'None', 'Y', 'None', 'N')}
-  client.userDB.get(message.author.id)
+    client.newRow.run(caller.id, 'Y', 0, 'None', 'None', 'Y', 'None', 'N')}
+  caller.DB = client.userDB.get(caller.id)
 
   //Message Attachments
   if (message.attachments.size) {var msgAtt = Array.from(message.attachments.values(), x => x.url)}
 
   //DM Dump Collector
   if (!message.guild) {
-    client.channels.cache.get("445068696310906901").send('``' + message.author.id + '`` - ' + message.author.tag + " dm'ed: test " + message.content, {files: msgAtt})}
+    if (caller.DB.blockDM === 'Y') {return message.react('❌')}
+    client.channels.cache.get("445068696310906901").send('``' + caller.id + '`` - ' + caller.tag + " dm'ed: test " + message.content, {files: msgAtt})}
 
   else {
 
@@ -73,7 +78,16 @@ client.on('message', message => {
     if (!client.srvrDB.get(message.guild.id)) {
       client.newRow = db.prepare('INSERT INTO srvrData (serverID, keysEnabled, customRole, callChann) VALUES (?, ?, ?, ?)')
       client.newRow.run(message.guild.id, 'Y', 'None', 'None')}
-    client.srvrDB.get(message.guild.id)
+    message.guild.DB = client.srvrDB.get(message.guild.id)
+
+    //Lucky Keys
+    if (v.keyIDs.some(word => message.id.endsWith(word))) {
+      if (caller.DB.getKeys === 'Y' && message.guild.DB.keysEnabled === 'Y') {
+        var keysGot = f.randomObj(v.keyChances)
+        caller.DB.keys+= parseInt(keysGot)
+        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch()
+        client.cKeys.run(caller.DB.keys, caller.id)
+      message.react("541345931870732290")}}
 
     //Wiki bd
     //if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
@@ -82,9 +96,8 @@ client.on('message', message => {
     //Art Quote
     if (message.content.startsWith('https://discord.com/channels/412116759668064256/')) {
       var parts = message.content.split('/')
-      var origin = message.channel
-      client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(message => origin.send(message.content, (Array.from(message.attachments.values(), x => x.url)))            
-    }
+      message.delete()
+      client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(message => origin.send(message.content, {files: Array.from(message.attachments.values(), x => x.url)}))}
 
   }
 
@@ -92,8 +105,8 @@ client.on('message', message => {
   if (!message.content.toLowerCase().startsWith(v.prefix)) return;
 
   //Arguments
-	const args = message.content.slice(v.prefix.length).split(' ')
-  var commName = args[0].toLowerCase()
+	message.args = message.content.slice(v.prefix.length).split(' ')
+  var commName = message.args[0].toLowerCase()
 
   //Embeds
   var embed = new Discord.MessageEmbed(), embed2 = new Discord.MessageEmbed() 
@@ -103,35 +116,35 @@ client.on('message', message => {
   const command = client.commands.get(commName)
 
   //Keys Required
-  if (command.keyreq && command.keyreq > client.userDB.keys) {return message.channel.send('You dont have enough keys...')}
+  if (command.keyreq && command.keyreq > caller.DB.keys) {return origin.send('You dont have enough keys...')}
 
   //Args Related
   if (command.args) {
 
     //Attachments Replace Arguments (ARA)
-    if (!args[command.args] && command.ARA && msgAtt && msgAtt[0]) {command.args--}
+    if (!message.args[command.args] && command.ARA && msgAtt && msgAtt[0]) {command.args--}
 
     //Arguments Required
-    if (!args[command.args]) {return message.channel.send('Correct usage is "' + v.prefix + command.use + '"!')}
+    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}
 
   }
 
   //Image Required
-  if (command.imgreq && !msgAtt) {return message.channel.send('This command requires an image attached')}
+  if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached')}
 
   //Guilds Only
-  if (command.guild && !message.guild) {return message.channel.send("Can't use this here... (To see what you can do on DMs check the help page)")}
+  if (command.guild && !message.guild) {return origin.send("Can't use this here... (To see what you can do on DMs check the help page)")}
 
   //Guild Admins Only
   if (command.admin && !message.member.hasPermission('ADMINISTRATOR')) {return message.react('❌')}
 
   //Mod Lock
-  if (command.lock && !client.guilds.cache.get(v.srvrID).member(message.author.id).roles.cache.find(role => role.id === v.modsID[command.lock])) {return message.react('❌')}
+  if (command.lock && !client.guilds.cache.get(v.srvrID).member(caller.id).roles.cache.find(role => role.id === v.modsID[command.lock])) {return message.react('❌')}
 
   try {
 
     //Use Command
-    command.execute(client, message, args, msgAtt, embed, embed2, db, a, f, v)
+    command.execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v)
 
     //React When Done
     if (command.thumbs) {

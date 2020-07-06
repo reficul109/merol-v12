@@ -2,7 +2,7 @@ module.exports = {
   name: 'someone',
   args: 0,
   guild: true,
-	execute(client, message, args, msgAtt, embed, embed2, db, a, f, v) {
+	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var users = client.users.cache
     var members = Array.from(message.guild.members.cache.values(), x => x.id)
     if (message.content.toLowerCase().includes('!online')) {
@@ -13,4 +13,4 @@ module.exports = {
     embed.setAuthor('Random User!', selectedMember.displayAvatarURL())
     embed.addField('User', selectedMember)
     embed.setColor(v.corrColor)
-    message.channel.send(embed)}}
+    origin.send(embed)}}
