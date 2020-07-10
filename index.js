@@ -3,18 +3,17 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const fs = require('fs')
-
-//Page
-var port = 3000
-app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(port, () => console.log('Listening at port ' + port))
-setInterval(() => {
-  http.get('http://merol-v12--reficul109.repl.co')}, 280000)
-
-//Bot
 const Discord = require('discord.js')
 const a = require('./tools/arrays.json'), f = require('./tools/funcs.js'), v = require('./tools/vars.json')
 const client = new Discord.Client({presence: {status: 'online', activity: {name: f.randomObj(a.games)}}, disableMentions:'everyone'})
+
+//Page
+var port = 3000
+app.use(express.static('public'))
+app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(port, () => console.log('Listening at port ' + port))
+setInterval(() => {
+  http.get("http://merol-v12--reficul109.repl.co/")}, 280000)
 
 //Data Base
 const db = require('better-sqlite3')('./assets/data.db')
@@ -69,9 +68,9 @@ client.on('message', message => {
 
   //DM Dump Collector
   if (!message.guild) {
-    if (caller.DB.blockDM === 'Y') {return message.react('❌')}
-    client.channels.cache.get("445068696310906901").send('``' + caller.id + '`` - ' + caller.tag + " dm'ed: test " + message.content, {files: msgAtt})}
-
+    if (caller.DB.blockDM === 'N') {client.channels.cache.get("445068696310906901").send('``' + caller.id + '`` - ' + caller.tag + " dm'ed: " + message.content, {files: msgAtt})}
+    else {message.react('❌')}}
+   
   else {
 
     //New Server Catcher
@@ -84,10 +83,14 @@ client.on('message', message => {
     if (v.keyIDs.some(word => message.id.endsWith(word))) {
       if (caller.DB.getKeys === 'Y' && message.guild.DB.keysEnabled === 'Y') {
         var keysGot = f.randomObj(v.keyChances)
-        caller.DB.keys+= parseInt(keysGot)
-        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch()
+        caller.DB.keys+= keysGot
+        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(commandCaller.id + ' Probably blocked the bot'))
         client.cKeys.run(caller.DB.keys, caller.id)
       message.react("541345931870732290")}}
+
+    //Reacts
+    //if (message.id.endsWith("0")) {
+    //  if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(commandCaller.id + ' Has a broken reaction'))}}
 
     //Wiki bd
     //if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
