@@ -20,6 +20,7 @@ const db = require('better-sqlite3')('./assets/data.db')
 client.userDB = db.prepare('SELECT * FROM userData WHERE userID = ?')
 client.srvrDB = db.prepare('SELECT * FROM srvrData WHERE serverID = ?')
 client.cKeys = db.prepare("UPDATE userData SET keys = ? WHERE userID = ?")
+client.wMimRole = db.prepare('SELECT mimicRole FROM mods WHERE userID = ?')
 
 //Command Getter
 client.commands = new Discord.Collection()
@@ -32,7 +33,21 @@ for (const file of commandFiles) {
 client.once('ready', () => {
   console.log('Booted Up!')})
 
-//Guild Join.
+//Avys
+client.on('userUpdate', (oldUser, newUser) => {
+  client.wMimRole.get(oldUser.id)
+  if (client.wMimRole && client.wMimRole.mimicRole === 'Y') {
+    const getColors = require('get-image-colors')
+    getColors(newUser.displayAvatarURL({format: 'png', dynamyc: true})).then(colors => {
+    var numbs = ["ELEMENT 0, SKIP", colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
+    client.channels.cache.get("426520047301951509").send('<@' + oldUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
+    const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === oldUser.id, {time: 600000})
+    collector.on('collect', message => {
+      message.guild.member(oldUser).roles.color.setColor(numbs[parseInt(message.content)])
+      collector.stop()
+      message.react("440574288160882688")})})}})
+
+//Guild Join
 client.on('guildCreate', guild => {
   if (guild.available) {
     var embed = new Discord.MessageEmbed()
@@ -40,7 +55,7 @@ client.on('guildCreate', guild => {
     embed.addField('Joined **``ID:' + guild.id + '`` **-** ' + guild.name + '** [' + guild.memberCount + ' Users]', '(Owned by ``ID:' + guild.owner.id + '`` - ' + client.users.cache.get(guild.owner.id).tag + ')')
     client.channels.cache.get("565649417391046674").send(embed)}})
 
-//Guild Left.
+//Guild Left
 client.on('guildDelete', guild => {
   if (guild.available) {
     var embed = new Discord.MessageEmbed()
@@ -125,7 +140,7 @@ client.on('message', message => {
   if (command.args) {
 
     //Attachments Replace Arguments (ARA)
-    if (!message.args[command.args] && command.ARA && msgAtt && msgAtt[0]) {command.args--}
+    if (!message.args[command.args] && command.ARA && msgAtt) {command.args--}
 
     //Arguments Required
     if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}
@@ -134,7 +149,7 @@ client.on('message', message => {
 
   //Image Required
   if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached')}
-
+  
   //Guilds Only
   if (command.guild && !message.guild) {return origin.send("Can't use this here... (To see what you can do on DMs check the help page)")}
 
@@ -155,10 +170,7 @@ client.on('message', message => {
 
   } catch (error) {
     console.error(error)
-	  message.react("541339209986998277")
-  }
-  
-})
+	  message.react("541339209986998277")}})
 
 //Token
 client.login(process.env.TOKEN)
