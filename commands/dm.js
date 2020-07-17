@@ -11,4 +11,4 @@ module.exports = {
     embed.setAuthor(caller.id + ' - ' + caller.tag + ' sent a dm', caller.displayAvatarURL())
     embed.addField(message.content, (msgAtt || 'No attachments').toString())
     client.channels.cache.get("565649417391046674").send(embed)
-    message.mentions.users.first().send(argresult2, {files: msgAtt}).catch(() => origin.send('Unable to send'))}}
+    message.mentions.users.first().send(argresult2, {files: msgAtt}).catch(() => origin.send('Unable to send.'))}}

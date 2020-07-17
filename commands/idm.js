@@ -17,4 +17,4 @@ module.exports = {
       embed.addField(message.content, (msgAtt || 'No attachments').toString())
       client.channels.cache.get("565649417391046674").send(embed)
       tag = '\n└ **__Not a Mod__**'}
-    user.send(argresult2 + tag, {files: msgAtt}).catch(() => origin.send('Unable to send'))}}
+    user.send(argresult2 + tag, {files: msgAtt}).catch(() => origin.send('Unable to send.'))}}

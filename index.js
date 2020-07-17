@@ -148,7 +148,7 @@ client.on('message', message => {
   }
 
   //Image Required
-  if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached')}
+  if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached.')}
   
   //Guilds Only
   if (command.guild && !message.guild) {return origin.send("Can't use this here... (To see what you can do on DMs check the help page)")}
