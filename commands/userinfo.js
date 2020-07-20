@@ -17,4 +17,4 @@ module.exports = {
     embed.addField('Custom React (' + user.DB.getReact + ')', link + user.DB.customReact)
     embed.addField('Userdex (' + v.prefix + 'userdex)', user.DB.udexText)
     if (user.DB.udexImg !== 'None') {embed.setImage(user.DB.udexImg)}
-    origin.send(embed).catch(() => origin.send(embed.setImage("./assets/invImg.png")))}}
+    origin.send(embed).catch(() => origin.send(embed.setImage(v.URL + 'bot/invbig.png')))}}
