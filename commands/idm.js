@@ -5,11 +5,11 @@ module.exports = {
   use: 'idm <userID> <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
-    var argresult2 = message.args.slice(2).join(' ')
     var user = client.users.cache.get(message.args[1]), tag
     if (!user) {return message.react('❌')}
+    var argresult2 = message.args.slice(2).join(' ')
     if (origin.id === "445068696310906901") {
-      client.modsDB = db.prepare('SELECT * FROM mods WHERE userID = ?').get(caller.id)
+      client.modsDB = db.prepare("SELECT * FROM mods WHERE userID = ?").get(caller.id)
       tag = '\n└ **Mod ' + client.modsDB.modNick + '**'}
     else {
       embed.setColor(v.corrColor)

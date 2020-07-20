@@ -9,5 +9,5 @@ module.exports = {
     embed.addField('Consumables', '**Fake Pokecord spawn** (' + v.prefix + 'pkmn) - Cost 1 key\n**Fake Mudae roll** (' + v.prefix + 'marry) - Cost 1 key\n(These are not meant to do anything)\n**React spam a channel** (' + v.prefix + 'react spam) [30min] - Cost 3 keys\n**Server feature** (' + v.prefix + 'feature) [4weeks] - Cost 10 keys\n')
     embed.addField('**Please, if you dont want keys, use "' + v.prefix + 'getkeys"**', 'Help page: ' + v.URL)
     embed.setColor(v.corrColor)
-    //embed.setImage("../assets/samples.png")
+    //embed.setImage('./assets/samples.png')
     origin.send(embed)}}

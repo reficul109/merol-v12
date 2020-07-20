@@ -1,11 +1,7 @@
 //Packages
-const http = require('http')
-const express = require('express')
-const app = express()
-const fs = require('fs')
-const Discord = require('discord.js')
+const http = require('http'), express = require('express'), app = express(), fs = require('fs'), Discord = require('discord.js'), getColors = require('get-image-colors')
 const a = require('./tools/arrays.json'), f = require('./tools/funcs.js'), v = require('./tools/vars.json')
-const client = new Discord.Client({presence: {status: 'online', activity: {name: f.randomObj(a.games)}}, disableMentions:'everyone'})
+const client = new Discord.Client({presence: {status: 'online', activity: {name: f.randomObj(a.games)}}, disableMentions: 'everyone'})
 
 //Page
 var port = 3000
@@ -17,10 +13,10 @@ setInterval(() => {
 
 //Data Base
 const db = require('better-sqlite3')('./assets/data.db')
-client.userDB = db.prepare('SELECT * FROM userData WHERE userID = ?')
-client.srvrDB = db.prepare('SELECT * FROM srvrData WHERE serverID = ?')
+client.userDB = db.prepare("SELECT * FROM userData WHERE userID = ?")
+client.srvrDB = db.prepare("SELECT * FROM srvrData WHERE serverID = ?")
+client.modDB = db.prepare("SELECT * FROM mods WHERE userID = ?")
 client.cKeys = db.prepare("UPDATE userData SET keys = ? WHERE userID = ?")
-client.wMimRole = db.prepare('SELECT mimicRole FROM mods WHERE userID = ?')
 
 //Command Getter
 client.commands = new Discord.Collection()
@@ -35,11 +31,10 @@ client.once('ready', () => {
 
 //Avys
 client.on('userUpdate', (oldUser, newUser) => {
-  client.wMimRole.get(oldUser.id)
-  if (client.wMimRole && client.wMimRole.mimicRole === 'Y') {
-    const getColors = require('get-image-colors')
+  oldUser.DB = client.modDB.get(oldUser.id)
+  if (oldUser.DB && oldUser.DB.mimicRole === 'Y') {
     getColors(newUser.displayAvatarURL({format: 'png', dynamyc: true})).then(colors => {
-    var numbs = ["ELEMENT 0, SKIP", colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
+    var numbs = ['ELEMENT 0, SKIP', colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
     client.channels.cache.get("426520047301951509").send('<@' + oldUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === oldUser.id, {time: 600000})
     collector.on('collect', message => {
@@ -49,19 +44,19 @@ client.on('userUpdate', (oldUser, newUser) => {
 
 //Guild Join
 client.on('guildCreate', guild => {
-  if (guild.available) {
-    var embed = new Discord.MessageEmbed()
-    embed.setColor(v.corrColor)
-    embed.addField('Joined **``ID:' + guild.id + '`` **-** ' + guild.name + '** [' + guild.memberCount + ' Users]', '(Owned by ``ID:' + guild.owner.id + '`` - ' + client.users.cache.get(guild.owner.id).tag + ')')
-    client.channels.cache.get("565649417391046674").send(embed)}})
+  if (!guild.available) return;
+  var embed = new Discord.MessageEmbed()
+  embed.setColor(v.corrColor)
+  embed.addField('Joined **``ID:' + guild.id + '`` **-** ' + guild.name + '** [' + guild.memberCount + ' Users]', '(Owned by ``ID:' + guild.owner.id + '`` - ' + client.users.cache.get(guild.owner.id).tag + ')')
+  client.channels.cache.get("565649417391046674").send(embed)})
 
 //Guild Left
 client.on('guildDelete', guild => {
-  if (guild.available) {
-    var embed = new Discord.MessageEmbed()
-    embed.setColor(v.wrngColor)
-    embed.addField('Left **``ID:' + guild.id + '`` **-** ' + guild.name + '**', '_ _')
-    client.channels.cache.get("565649417391046674").send(embed)}})
+  if (!guild.available) return;
+  var embed = new Discord.MessageEmbed()
+  embed.setColor(v.wrngColor)
+  embed.addField('Left **``ID:' + guild.id + '`` **-** ' + guild.name + '**', '_ _')
+  client.channels.cache.get("565649417391046674").send(embed)})
 
 //Messages
 client.on('message', message => {
@@ -74,7 +69,7 @@ client.on('message', message => {
 
   //New User Catcher
   if (!client.userDB.get(caller.id)) {
-    client.newRow = db.prepare('INSERT INTO userData (userID, getKeys, keys, udexText, udexImg, getReact, customReact, blockDM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+    client.newRow = db.prepare("INSERT INTO userData (userID, getKeys, keys, udexText, udexImg, getReact, customReact, blockDM) VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
     client.newRow.run(caller.id, 'Y', 0, 'None', 'None', 'Y', 'None', 'N')}
   caller.DB = client.userDB.get(caller.id)
 
@@ -90,7 +85,7 @@ client.on('message', message => {
 
     //New Server Catcher
     if (!client.srvrDB.get(message.guild.id)) {
-      client.newRow = db.prepare('INSERT INTO srvrData (serverID, keysEnabled, customRole, callChann) VALUES (?, ?, ?, ?)')
+      client.newRow = db.prepare("INSERT INTO srvrData (serverID, keysEnabled, customRole, callChann) VALUES (?, ?, ?, ?)")
       client.newRow.run(message.guild.id, 'Y', 'None', 'None')}
     message.guild.DB = client.srvrDB.get(message.guild.id)
 
@@ -112,7 +107,7 @@ client.on('message', message => {
     //  message.react('🎉')}
 
     //Art Quote
-    if (message.content.startsWith('https://discord.com/channels/412116759668064256/')) {
+    if (message.content.startsWith("https://discord.com/channels/412116759668064256/")) {
       var parts = message.content.split('/')
       message.delete()
       client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(message => origin.send(message.content, {files: Array.from(message.attachments.values(), x => x.url)}))}

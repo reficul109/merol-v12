@@ -8,5 +8,5 @@ module.exports = {
     if (argresult1.toLowerCase().startsWith('x')) {
       var shitload = parseInt(argresult1.substring(1))
       if (!shitload || shitload > 30) {return message.react('❌')}
-      for (i = 0; i < --shitload; i++) {array.push(f.randomObj(emotes))}}
-    origin.send(array)}}
+      for (i = 1; i < shitload; i++) {array.push(f.randomObj(emotes))}}
+    origin.send(array.join(''))}}

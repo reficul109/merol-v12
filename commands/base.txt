@@ -7,7 +7,6 @@ module.exports = {
   admin: BOOLEAN,
   lock: 0 - 2,
   keyreq: INT,
-  keydes: INT,
   use: 'USAGE',
   thumbs: BOOLEAN,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {}}
