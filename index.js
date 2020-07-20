@@ -125,8 +125,8 @@ client.on('message', message => {
   var embed = new Discord.MessageEmbed(), embed2 = new Discord.MessageEmbed() 
 
   //Command Detector
-  if (!client.commands.has(commName)) return;
-  const command = client.commands.get(commName)
+  const command = client.commands.get(commName) || client.commands.find(command => command.alias && command.alias.includes(commName));
+  if (!command) return;
 
   //Keys Required
   if (command.keyreq && command.keyreq > caller.DB.keys) {return origin.send('You dont have enough keys...')}

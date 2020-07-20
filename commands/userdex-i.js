@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'userdex-i',
+  alias: ['ud-i'],
   args: 1,
   ARA: true,
   keyreq: 20,

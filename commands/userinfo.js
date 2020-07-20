@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'userinfo',
+  alias: ['ui'],
   args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var user = (message.mentions.users.first() || client.users.cache.get(message.args[1]) || caller)

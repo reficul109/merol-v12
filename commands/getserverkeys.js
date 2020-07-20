@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'getserverkeys',
+  alias: ['gsk'],
   args: 0,
   guild: true,
   admin: true,

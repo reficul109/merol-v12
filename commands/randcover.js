@@ -1,5 +1,6 @@
 module.exports = {
   name: 'randcover',
+  alias: ['rc'],
   args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     const ytpl = require('yt-playlist-scraper')

@@ -1,5 +1,6 @@
 module.exports = {
   name: 'randost',
+  alias: ['ro'],
   args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     const fs = require('fs')
