@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'wadda',
-  args: 1,
   use: 'wadda <text>',
+  args: 1,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     const jimp = require('jimp')
     var argresult1 = message.args.slice(1).join(' ')

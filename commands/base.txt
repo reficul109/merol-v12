@@ -1,14 +1,14 @@
 module.exports = {
 	name: 'NAME',
+  use: 'USAGE',
   alias: [ARRAY],
   args: 0 - 3,
   imgreq: BOOLEAN,
   ARA: BOOLEAN,
+  keyreq: INT,
   guild: BOOLEAN,
   admin: BOOLEAN,
   lock: 0 - 2,
-  keyreq: INT,
-  use: 'USAGE',
   thumbs: BOOLEAN,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {}}
 

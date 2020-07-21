@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'idsay',
+  use: 'idsay <channelID> <text>',
   args: 2,
   ARA: true,
-  use: 'idsay <channelID> <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var chann = client.channels.cache.get(message.args[1])

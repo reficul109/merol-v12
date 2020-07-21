@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'ask',
-  args: 1,
   use: 'ask <text>',
+  args: 1,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var argresult1 = message.args.slice(1).join(' ')
     if (parseInt(message.id.slice(--message.id.length)) % 2) {embed.setAuthor('Ater', v.URL + 'bot/ater.png')}

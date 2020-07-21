@@ -1,9 +1,9 @@
 module.exports = {
 	name: 'userdex',
+  use: 'userdex <text>',
   alias: ['ud'],
   args: 1,
   keyreq: 20,
-  use: 'userdex <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var argresult1 = message.args.slice(1).join(' ')   

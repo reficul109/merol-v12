@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'dm',
+  use: 'dm <userMention> <text>',
   args: 2,
   ARA: true,
-  use: 'dm <userMention> <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     if (!message.mentions.users.size) {return message.react('❌')}

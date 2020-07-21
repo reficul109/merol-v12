@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'imp',
+  use: 'imp <text> (Please, be specific)',
   args: 1,
   ARA: true,
-  use: 'imp <text> (Please, be specific)',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var argresult1 = message.args.slice(1).join(' ')

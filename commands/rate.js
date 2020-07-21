@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'rate',
-  args: 1,
   use: 'rate <text>',
+  args: 1,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var argresult1 = message.args.slice(1).join(' ')
     var waifuworth = Math.floor(Math.random() * 11)

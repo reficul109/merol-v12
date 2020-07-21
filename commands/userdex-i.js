@@ -1,10 +1,10 @@
 module.exports = {
 	name: 'userdex-i',
+  use: 'userdex-i <image [URL or Attachment]>',
   alias: ['ud-i'],
   args: 1,
   ARA: true,
   keyreq: 20,
-  use: 'userdex-i <image [URL or Attachment]>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var argresult1 = message.args.slice(1).join(' ')   

@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'idm',
+  use: 'idm <userID> <text>',
   args: 2,
   ARA: true,
-  use: 'idm <userID> <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var user = client.users.cache.get(message.args[1]), tag

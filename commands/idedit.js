@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'idedit',
+  use: 'idedit <channelID> <messageID> <text>',
   args: 3,
   lock: 1,
-  use: 'idedit <channelID> <messageID> <text>',
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var chann = client.channels.cache.get(message.args[1])
