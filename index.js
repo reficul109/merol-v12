@@ -48,7 +48,7 @@ client.on('guildCreate', guild => {
   var embed = new Discord.MessageEmbed()
   embed.setColor(v.corrColor)
   embed.addField('Joined **``ID:' + guild.id + '`` **-** ' + guild.name + '** [' + guild.memberCount + ' Users]', '(Owned by ``ID:' + guild.owner.id + '`` - ' + client.users.cache.get(guild.owner.id).tag + ')')
-  client.channels.cache.get("565649417391046674").send(embed)})
+  client.channels.cache.get(v.logChann).send(embed)})
 
 //Guild Left
 client.on('guildDelete', guild => {
@@ -56,7 +56,7 @@ client.on('guildDelete', guild => {
   var embed = new Discord.MessageEmbed()
   embed.setColor(v.wrngColor)
   embed.addField('Left **``ID:' + guild.id + '`` **-** ' + guild.name + '**', '_ _')
-  client.channels.cache.get("565649417391046674").send(embed)})
+  client.channels.cache.get(v.logChann).send(embed)})
 
 //Messages
 client.on('message', message => {
@@ -134,11 +134,14 @@ client.on('message', message => {
   //Args Related
   if (command.args) {
 
+    //Argresult
+    message.argresult = message.args.slice(command.args).join(' ')
+
     //Attachments Replace Arguments (ARA)
     if (!message.args[command.args] && command.ARA && msgAtt) {command.args--}
 
     //Arguments Required
-    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}
+    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}    
 
   }
 

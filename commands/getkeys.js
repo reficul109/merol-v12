@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'getkeys',
-  alias: ['gk'],
+  alias: ['gke'],
   args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     client.cwKeys = db.prepare("UPDATE userData SET getKeys = ? WHERE userID = ?")

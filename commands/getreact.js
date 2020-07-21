@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'getreact',
-  alias: ['gr'],
+  alias: ['gre'],
   args: 0,
   keyreq: 35,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
@@ -27,5 +27,4 @@ module.exports = {
       else {
         client.cReact.run('Y', emoji.toString(), caller.id)
         client.cKeys.run(--caller.DB.keys, caller.id)
-        origin.send('Custom reaction updated.')}
-      collector.stop()})})}}
+        origin.send('Custom reaction updated.')}})})}}
