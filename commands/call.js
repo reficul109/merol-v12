@@ -47,4 +47,4 @@ module.exports = {
           origin.send('📡 Call denied')
           callChann.send('📡 Call denied')})
         cHangup.on('end', () => {
-        nMessage.reactions.removeAll()})})}}}
+          nMessage.reactions.removeAll()})})}}}

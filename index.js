@@ -33,10 +33,10 @@ client.once('ready', () => {
 client.on('userUpdate', newUser => {
   newUser.DB = client.modDB.get(newUser.id)
   if (newUser.DB && newUser.DB.mimicRole === 'Y') {
-    getColors(newUser.displayAvatarURL({format: 'png'})).then(colors => {
+    getColors(newUser.displayAvatarURL({format: 'png', dynamic: true})).then(colors => {
     var numbs = ['ELEMENT 0, SKIP', colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
     client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
-    const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === oldUser.id, {time: 600000})
+    const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
     collector.on('collect', message => {
       message.guild.member(newUser).roles.color.setColor(numbs[parseInt(message.content)])
       collector.stop()
