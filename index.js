@@ -30,15 +30,15 @@ client.once('ready', () => {
   console.log('Booted Up!')})
 
 //Avys
-client.on('userUpdate', (oldUser, newUser) => {
-  oldUser.DB = client.modDB.get(oldUser.id)
-  if (oldUser.DB && oldUser.DB.mimicRole === 'Y') {
-    getColors(newUser.displayAvatarURL({format: 'png', dynamyc: true})).then(colors => {
+client.on('userUpdate', newUser => {
+  newUser.DB = client.modDB.get(newUser.id)
+  if (newUser.DB && newUser.DB.mimicRole === 'Y') {
+    getColors(newUser.displayAvatarURL({format: 'png'})).then(colors => {
     var numbs = ['ELEMENT 0, SKIP', colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
-    client.channels.cache.get("426520047301951509").send('<@' + oldUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
+    client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === oldUser.id, {time: 600000})
     collector.on('collect', message => {
-      message.guild.member(oldUser).roles.color.setColor(numbs[parseInt(message.content)])
+      message.guild.member(newUser).roles.color.setColor(numbs[parseInt(message.content)])
       collector.stop()
       message.react("440574288160882688")})})}})
 
@@ -121,9 +121,6 @@ client.on('message', message => {
 	message.args = message.content.slice(v.prefix.length).split(' ')
   var commName = message.args[0].toLowerCase()
 
-  //Embeds
-  var embed = new Discord.MessageEmbed(), embed2 = new Discord.MessageEmbed() 
-
   //Command Detector
   const command = client.commands.get(commName) || client.commands.find(command => command.alias && command.alias.includes(commName));
   if (!command) return;
@@ -141,13 +138,13 @@ client.on('message', message => {
     if (!message.args[command.args] && command.ARA && msgAtt) {command.args--}
 
     //Arguments Required
-    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}    
+    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}  
 
   }
 
   //Image Required
   if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached.')}
-  
+
   //Guilds Only
   if (command.guild && !message.guild) {return origin.send("Can't use this here... (To see what you can do on DMs check the help page)")}
 
@@ -158,6 +155,9 @@ client.on('message', message => {
   if (command.lock && !client.guilds.cache.get(v.srvrID).member(caller.id).roles.cache.find(role => role.id === v.modsID[command.lock])) {return message.react('❌')}
 
   try {
+
+    //Embeds
+    var embed = new Discord.MessageEmbed(), embed2 = new Discord.MessageEmbed()
 
     //Use Command
     command.execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v)

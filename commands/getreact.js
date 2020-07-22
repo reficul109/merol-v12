@@ -11,7 +11,7 @@ module.exports = {
     message.react("734130786520793129")
     message.react("❌")
     const collector = message.createReactionCollector((reaction, user) => user.id === caller.id, {time: 600000})
-    collector.on('collect', (reaction, collector) => {
+    collector.on('collect', reaction => {
       var emoji = reaction.emoji
       if (emoji.id === "734130786520793129") {
         client.cReact.run('Y', caller.DB.customReact, caller.id)
@@ -27,4 +27,5 @@ module.exports = {
       else {
         client.cReact.run('Y', emoji.toString(), caller.id)
         client.cKeys.run(--caller.DB.keys, caller.id)
-        origin.send('Custom reaction updated.')}})})}}
+        origin.send('Custom reaction updated.')}
+      collector.stop()})})}}
