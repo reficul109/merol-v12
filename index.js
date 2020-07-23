@@ -30,17 +30,17 @@ client.once('ready', () => {
   console.log('Booted Up!')})
 
 //Avys
-client.on('userUpdate', newUser => {
+client.on('userUpdate', (oldUser, newUser) => {
   newUser.DB = client.modDB.get(newUser.id)
   if (newUser.DB && newUser.DB.mimicRole === 'Y') {
     getColors(newUser.displayAvatarURL({format: 'png', dynamic: true})).then(colors => {
     var numbs = ['ELEMENT 0, SKIP', colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
     client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
-    collector.on('collect', message => {
-      message.guild.member(newUser).roles.color.setColor(numbs[parseInt(message.content)])
+    collector.on('collect', cMessage => {
+      cMessage.guild.member(newUser).roles.color.setColor(numbs[parseInt(cMmessage.content)])
       collector.stop()
-      message.react("440574288160882688")})})}})
+      cMessage.react("440574288160882688")})})}})
 
 //Guild Join
 client.on('guildCreate', guild => {

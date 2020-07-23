@@ -14,12 +14,12 @@ module.exports = {
       var callChann = channels.get(message.args[1])
       if (callChann === origin) {return message.react('❌')}
       channels.get(v.logChann).send('``' + caller.id + '`` - **' + caller.tag + '** is trying to call **' + callChann.guild + '**')
-      embed.setColor(v.corrColor)
-      embed.addField('📡 Calling ' + callChann.guild.name, 'Awaiting for a response')
       embed.setThumbnail(callChann.guild.iconURL({format: 'png', dynamic: true}))
-      embed2.setColor(v.corrColor)
-      embed2.addField('📡 ' + message.guild.name + ' is calling you!', '(``Channel ID:' + origin.id + '``)\nYou have 10 minutes to respond\nReact to Accept/Deny the call!.')
+      embed.addField('📡 Calling ' + callChann.guild.name, 'Awaiting for a response')
+      embed.setColor(v.corrColor)
       embed2.setThumbnail(message.guild.iconURL({format: 'png', dynamic: true}))
+      embed2.addField('📡 ' + message.guild.name + ' is calling you!', '(``Channel ID:' + origin.id + '``)\nYou have 10 minutes to respond\nReact to Accept/Deny the call!.')
+      embed2.setColor(v.corrColor)
       origin.send(embed)
       callChann.send(embed2).then(function (nMessage) {
         nMessage.react("734130786520793129")

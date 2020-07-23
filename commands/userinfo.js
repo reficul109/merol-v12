@@ -10,7 +10,6 @@ module.exports = {
     if (act[0]) {game+= '\n' + act[0].type.toLowerCase() + ': ' + (act[0].emoji || '').toString() + ' ' + (act[0].state || act[0].name)}
     embed.setAuthor(user.tag)
     embed.setThumbnail(user.displayAvatarURL({format: 'png', dynamyc: true}))
-    embed.setColor(v.corrColor)
     embed.addField('User ID', user.id)
     embed.addField('Presence', 'Status: ' + user.presence.status + game)
     if (message.guild && message.guild.member(user)) {embed.addField('Joined', 'Discord: ' + user.createdAt.toDateString() + '\nThis Server: ' + message.guild.member(user).joinedAt.toDateString())}
@@ -18,4 +17,5 @@ module.exports = {
     embed.addField('Custom React (' + user.DB.getReact + ')', link + user.DB.customReact)
     embed.addField('Userdex (' + v.prefix + 'userdex)', user.DB.udexText)
     if (user.DB.udexImg !== 'None') {embed.setImage(user.DB.udexImg)}
+    embed.setColor(v.corrColor)
     origin.send(embed).catch(() => origin.send(embed.setImage(v.URL + 'bot/invbig.png')))}}
