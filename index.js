@@ -94,27 +94,32 @@ client.on('message', message => {
       if (caller.DB.getKeys === 'Y' && message.guild.DB.keysEnabled === 'Y') {
         var keysGot = f.randomObj(v.keyChances)
         caller.DB.keys+= keysGot
-        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(commandCaller.id + ' Probably blocked the bot'))
         client.cKeys.run(caller.DB.keys, caller.id)
+        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(commandCaller.id + ' Probably blocked the bot'))
       message.react("541345931870732290")}}
 
     //Reacts
-    //if (message.id.endsWith("0")) {
-    //  if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(commandCaller.id + ' Has a broken reaction'))}}
+    if (message.id.endsWith("0")) {
+      if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(commandCaller.id + ' Has a broken reaction'))}}
 
     //Wiki bd
-    //if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
-    //  message.react('🎉')}
+    if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
+      message.react('🎉')}
 
     //Art
     if (origin.parentID === "430744121297207296" && msgAtt)  {
       message.react(f.randomObj(a.hearts))}
 
     //Quote
-    if (message.content.startsWith("https://discord.com/channels/396184349101260800/")) {
-      var parts = message.content.split('/')
+    if (message.content.startsWith("https://discordapp.com/channels/396184349101260800/")) {
+      var parts = message.content.split('/'), artEmbed = new Discord.MessageEmbed()
       message.delete()
-      client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(message => origin.send(message.content, {files: Array.from(message.attachments.values(), x => x.url)}))}
+      client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage => {
+        artEmbed.addField(nMessage.content, '[Jump to message](' + message.content + ')')
+        artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
+        artEmbed.setFooter('To make a message like this one, check the pins!')
+        artEmbed.setColor(v.corrColor)
+        origin.send(artEmbed)})}
 
   }
 
@@ -167,8 +172,7 @@ client.on('message', message => {
     command.execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v)
 
     //React When Done
-    if (command.thumbs) {
-      message.react("440574288160882688")}
+    if (command.thumbs) {message.react("440574288160882688")}
 
   } catch (error) {
     console.error(error)

@@ -7,9 +7,9 @@ module.exports = {
     var channels = client.channels.cache, guilds = client.guilds.cache, callChannels = ''
     if (!channels.get(message.args[1])) {
       for (const guild of db.prepare('SELECT * FROM srvrData').iterate()) {
-      if (guild.callChann !== 'None' && channels.get(guild.callChann)) {
-        callChannels+= guilds.get(guild.serverID).name + ': #' + guild.callChann + '\n'}}
-      origin.send('Correct usage is "' + v.prefix + 'setcall <channelID>"! (Here are a few channels you can call)```css\n' + callChannels + '\n[Sign your server with "' + v.prefix + 'setchannel"]\n[Stop any call from any side by using "!stopcall"]```')}
+        if (guild.callChann !== 'None' && channels.get(guild.callChann)) {
+          callChannels+= guilds.get(guild.serverID).name + ': #' + guild.callChann + '\n'}}
+        origin.send('Correct usage is "' + v.prefix + 'setcall <channelID>"! (Here are a few channels you can call)```css\n' + callChannels + '\n[Sign your server with "' + v.prefix + 'setchannel"]\n[Stop any call from any side by using "!stopcall"]```')}
     else {
       var callChann = channels.get(message.args[1])
       if (callChann === origin) {return message.react('❌')}

@@ -7,7 +7,7 @@ module.exports = {
     var guild = client.guilds.cache.get(message.args[1])
     if (!guild) {return message.react('❌')}
     embed.setTitle('Leave **"' + guild.name + '"**?')
-    embed.setColor(v.corrColor)
+    embed.setColor(v.wrngColor)
     origin.send(embed).then(function (nMessage) {
       nMessage.react("734130786520793129")
       nMessage.react("❌")
