@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'setnickname',
   use: 'setnickname <guildID> <text>',
-  alias: ['setnick', 'sn'],
+  alias: ['sn'],
   args: 2,
   lock: 1,
   thumbs: true,

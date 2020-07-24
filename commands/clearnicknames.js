@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'clearnicknames',
-  alias: ['clearnicks', 'cn'],
+  alias: ['cn'],
   args: 0,
   lock: 2,
   thumbs: true,

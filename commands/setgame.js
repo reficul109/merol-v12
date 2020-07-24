@@ -1,7 +1,7 @@
 module.exports = {
-	name: 'setactivity',
-  use: 'setactivity <"PLAYING" / "WATCHING" / "LISTENING"> <text>',
-  alias: ['setact', 'sa'],
+	name: 'setgame',
+  use: 'setgame <"PLAYING" / "WATCHING" / "LISTENING"> <text>',
+  alias: ['sg'],
   args: 2,
   lock: 1,
   thumbs: true,
