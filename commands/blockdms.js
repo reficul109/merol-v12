@@ -1,7 +1,7 @@
 module.exports = {
 	name: 'blockdms',
-  alias: ['b'],
-  args: 0,
+  use: 'blockdms <userID>',
+  args: 1,
   lock: 1,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var user = client.users.cache.get(message.args[1])

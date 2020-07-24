@@ -1,6 +1,5 @@
 module.exports = {
 	name: 'helpkeys',
-  args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var modPerma = ''
     if (message.guild === client.guilds.cache.get(v.srvrID)) {modPerma+='\n\n🔐 **100 Keys** - Visitor role spot!\n(' + v.prefix + 'drop invite)'}

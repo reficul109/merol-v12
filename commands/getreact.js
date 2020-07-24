@@ -1,7 +1,6 @@
 module.exports = {
 	name: 'getreact',
   alias: ['gre'],
-  args: 0,
   keyreq: 35,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     client.cReact = db.prepare("UPDATE userData SET getReact = ?, customReact = ? WHERE userID = ?")

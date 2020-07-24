@@ -1,7 +1,6 @@
 module.exports = {
 	name: 'reactspam',
   alias: ['rs'],
-  args: 0,
   keyreq: 3,
   guild: true,
   thumbs: true,

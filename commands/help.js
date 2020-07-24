@@ -1,6 +1,5 @@
 module.exports = {
 	name: 'help',
-  args: 0,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     embed.addField('Help Page:', v.URL)
     embed.addField('Last Update:', 'WIP')

@@ -1,6 +1,5 @@
 module.exports = {
 	name: 'feature',
-  args: 0,
   guild: true,
   admin: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {

@@ -1,6 +1,5 @@
 module.exports = {
 	name: 'pkmn',
-  args: 0,
   keyreq: 1,
   guild: true,
   imgreq: true,

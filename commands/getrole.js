@@ -1,7 +1,6 @@
 module.exports = {
 	name: 'getrole',
   alias: ['gro'],
-  args: 0,
   keyreq: 10,
   guild: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {

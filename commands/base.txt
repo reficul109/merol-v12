@@ -2,18 +2,19 @@ module.exports = {
 	name: 'NAME',
   use: 'USAGE',
   alias: [ARRAY],
-  args: 0 - 3,
+  args: 1 - 3,
   imgreq: BOOLEAN,
   ARA: BOOLEAN,
   keyreq: INT,
   guild: BOOLEAN,
   admin: BOOLEAN,
-  lock: 0 - 2,
+  lock: 1 - 2,
   thumbs: BOOLEAN,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {}}
 
-  REQUIRED: NAME, ARGS.
-  REQUIRED WITH ARGS > 0: USE.
+  REQUIRED: NAME
+  REQUIRED WITH ARGS: USE
+  REQUIRED WITH ARA: ARGS
   REQUIRED WITH ADMIN: GUILD
 
   EMBED ATTRIBUTES ORDER: AUTHOR / TITLE, THUMBNAILS, FIELDS, IMAGES, COLOR
