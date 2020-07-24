@@ -6,4 +6,6 @@ module.exports = {
   lock: 1,
   thumbs: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
-    client.guilds.cache.get(message.args[1]).me.setNickname(message.argresult)}}
+    var guild = client.guilds.cache.get(message.args[1])
+    if (!guild) {return message.react('❌')}
+    guild.me.setNickname(message.argresult)}}

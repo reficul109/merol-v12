@@ -106,8 +106,12 @@ client.on('message', message => {
     //if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
     //  message.react('🎉')}
 
-    //Art Quote
-    if (message.content.startsWith("https://discord.com/channels/412116759668064256/")) {
+    //Art
+    if (origin.parentID === "430744121297207296" && msgAtt)  {
+      message.react(f.randomObj(a.hearts))}
+
+    //Quote
+    if (message.content.startsWith("https://discord.com/channels/396184349101260800/")) {
       var parts = message.content.split('/')
       message.delete()
       client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(message => origin.send(message.content, {files: Array.from(message.attachments.values(), x => x.url)}))}
