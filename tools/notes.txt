@@ -5,7 +5,7 @@
   PLACEHOLDERS FOR FUTURE PASTE, DELETE WHEN DONE
   var sArgresult1 = args.slice(1, 2).join(' ') //same as message.args[1]
   var sArgresult2 = args.slice(2, 3).join(' ') //same as message.args[2]
-  var argresult1 = message.args.slice(1).join(' ') 
+  var argresult1 = message.args.slice(1).join(' ')
   var argresult2 = message.args.slice(2).join(' ') //same as message.argresult
   var argresult3 = message.args.slice(3).join(' ')
 

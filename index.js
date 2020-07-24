@@ -38,7 +38,7 @@ client.on('userUpdate', (oldUser, newUser) => {
     client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
     collector.on('collect', cMessage => {
-      cMessage.guild.member(newUser).roles.color.setColor(numbs[parseInt(cMmessage.content)])
+      cMessage.guild.member(newUser).roles.color.setColor(numbs[parseInt(cMessage.content)])
       collector.stop()
       cMessage.react("440574288160882688")})})}})
 

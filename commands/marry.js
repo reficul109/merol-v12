@@ -9,7 +9,7 @@ module.exports = {
     const jimp = require('jimp')
     jimp.read(msgAtt[0]).then(async function (waifu) {await waifu.write('./public/bot/waifu.png')})
     message.delete()
-    embed.addField(message.argresult, '(Meme Series)\n**109**')
+    embed.addField(message.argresult, '(Meme Series)\n**109** :small_blue_diamond:')
     embed.setImage(v.URL + 'bot/waifu.png')
     embed.setColor(v.wrngColor)
     origin.send(embed).then(function (nMessage) {nMessage.react('💖')})
