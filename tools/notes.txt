@@ -1,6 +1,6 @@
 ---------------------------------------------------------- ♫ Paste
 
-<img class="new" title= "MONTH DAY - TITLE" src="https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2F!.gif">
+<img class="new" title= "MONTH DAY - TITLE" src="https://merol-v12--reficul109.repl.co/page/!.gif">
 
   PLACEHOLDERS FOR FUTURE PASTE, DELETE WHEN DONE
   var sArgresult1 = args.slice(1, 2).join(' ') //same as message.args[1]

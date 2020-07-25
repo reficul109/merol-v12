@@ -6,7 +6,7 @@ const client = new Discord.Client({presence: {status: 'online', activity: {name:
 //Page
 var port = 3000
 app.use(express.static('public'))
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.sendFile('./public/index.html'))
 app.listen(port, () => console.log('Listening at port ' + port))
 setInterval(() => {
   http.get("http://merol-v12--reficul109.repl.co/")}, 280000)
@@ -27,6 +27,8 @@ for (const file of commandFiles) {
 
 //Ready
 client.once('ready', () => {
+  var jsonContent = '{"nUsers": "' + client.users.cache.size + '", "nServers": "' + client.guilds.cache.size + '", "currIcon": "' + client.user.avatarURL({format: 'png', dynamic: true}) +'", "modPass": "' + v.modPass +'"}'
+  fs.writeFile("./public/generalD.json", jsonContent, 'utf8', (err) => {})
   console.log('Booted Up!')})
 
 //Avys
@@ -34,11 +36,10 @@ client.on('userUpdate', (oldUser, newUser) => {
   newUser.DB = client.modDB.get(newUser.id)
   if (newUser.DB && newUser.DB.mimicRole === 'Y') {
     getColors(newUser.displayAvatarURL({format: 'png', dynamic: true})).then(colors => {
-    var numbs = ['ELEMENT 0, SKIP', colors[0].toString(), colors[1].toString(), colors[2].toString(), colors[3].toString(), colors[4].toString()]
     client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + numbs[1].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[2].substring(1) + '\nhttps://encycolorpedia.com/' + numbs[3].substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
     collector.on('collect', cMessage => {
-      cMessage.guild.member(newUser).roles.color.setColor(numbs[parseInt(cMessage.content)])
+      cMessage.guild.member(newUser).roles.color.setColor(colors[++parseInt(cMessage.content)].toString())
       collector.stop()
       cMessage.react("440574288160882688")})})}})
 
@@ -102,24 +103,28 @@ client.on('message', message => {
     if (message.id.endsWith("0")) {
       if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(caller.id + ' Has a broken reaction'))}}
 
-    //Wiki bd
-    if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {
-      message.react('🎉')}
+    //Wiki 
+    if (message.guild === client.guilds.cache.get("396184349101260800")) {
+      
+      //Birthday
+      if (message.member.roles.cache.find(role => role.id === "445996236890439680")) {message.react('🎉')}
 
-    //Art
-    if (origin.parentID === "430744121297207296" && msgAtt)  {
-      message.react(f.randomObj(a.hearts))}
+      //Art
+      if (origin.parentID === "430744121297207296")  {
+      
+        //Hearts
+        if (msgAtt) {message.react(f.randomObj(a.hearts))}
 
-    //Quote
-    if (message.content.startsWith("https://discordapp.com/channels/396184349101260800/")) {
-      var parts = message.content.split('/'), artEmbed = new Discord.MessageEmbed()
-      message.delete()
-      client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage => {
-        artEmbed.addField(nMessage.content, '[Jump to message](' + message.content + ')')
-        artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
-        artEmbed.setFooter('To make a message like this one, check the pins!')
-        artEmbed.setColor(v.corrColor)
-        origin.send(artEmbed)})}
+        //Quote
+        if (message.content.startsWith("https://discord")) {
+          var parts = message.content.split('/'), artEmbed = new Discord.MessageEmbed()
+          message.delete()
+          client.channels.cache.get(parts[5]).messages.fetch(parts[6]).then(nMessage => {
+            artEmbed.addField(nMessage.content, '[Jump to message](' + message.content + ')')
+            artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
+            artEmbed.setFooter('To make a message like this one, check the pins!')
+            artEmbed.setColor(v.corrColor)
+            origin.send(artEmbed)})}}}
 
   }
 
@@ -147,9 +152,7 @@ client.on('message', message => {
     if (!message.args[command.args] && command.ARA && msgAtt) {command.args--}
 
     //Arguments Required
-    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}  
-
-  }
+    if (!message.args[command.args]) {return origin.send('Correct usage is "' + v.prefix + command.use + '"!')}  }
 
   //Image Required
   if (command.imgreq && !msgAtt) {return origin.send('This command requires an image attached.')}
