@@ -95,12 +95,12 @@ client.on('message', message => {
         var keysGot = f.randomObj(v.keyChances)
         caller.DB.keys+= keysGot
         client.cKeys.run(caller.DB.keys, caller.id)
-        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(commandCaller.id + ' Probably blocked the bot'))
+        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(caller.id + ' Probably blocked the bot'))
       message.react("541345931870732290")}}
 
     //Reacts
     if (message.id.endsWith("0")) {
-      if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(commandCaller.id + ' Has a broken reaction'))}}
+      if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(caller.id + ' Has a broken reaction'))}}
 
     //Wiki bd
     if (message.guild === client.guilds.cache.get("396184349101260800") && message.member.roles.cache.find(role => role.id === "445996236890439680")) {

@@ -1,0 +1,140 @@
+/*
+Display
+Margin
+Cursor
+Width-Height
+Background
+Color
+Font
+Border
+Text (Align, Decoration)
+Overflow
+Shadow
+Target
+Transform
+*/
+
+body {
+  cursor:url(https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2Fhaifu4.1.png), auto;
+  background-color: #36393f;
+  color: #f2f2f2;
+  font-family: 'Lato', sans-serif;}
+
+button {
+  cursor:url(https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2Fhaifu4.2.png), auto;
+  width: 150px;
+  height: 40px;
+  background-color: #f2f2f2;
+  color: #738adb;
+  font-size: 115%;
+  border: 3px ridge;
+  border-radius: 5px;
+  box-shadow: 0 0 3px #f2f2f2 inset, 0 4px 8px #000000, 0 2px 8px #4d57c2;}
+
+button:hover {
+  background-color: #dbe0f0;}
+
+button:active {
+  box-shadow: 0 0 1.5px #ffffff inset , 0 2px 4px #000000 , 0 1px 4px #4d57c2;
+  transform: translateY(2.5px);}
+
+input[type="number"] {
+  margin: 20px;
+  width: 80px;
+  height: 40px;
+  font-size: 25px;
+  text-align: center;}
+
+input[type="text"] {
+  margin: 20px;
+  width: 200px;
+  height: 20px;
+  font-size: 16px;
+  text-align: center;}
+
+a {
+  display: inline block;
+  cursor:url(https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2Fhaifu4.2.png), auto;
+  text-decoration: none;
+  target: "_blank";}
+
+a:link {
+  color: #63df47;}
+
+a:visited {
+  color: #ff7226;}
+
+a:hover {
+  background-color: #dbe0f0;
+  text-decoration: underline;}
+ 
+a:active {
+  box-shadow: 0 0 1px #ffffff inset , 2px 2px 4px #000000 , 0 0 4px #4d57c2;
+  transform: translateY(2px);}
+
+h2 {
+  color: #63df47;}
+
+h3 {
+  color: #ff7226;}
+
+h5 {
+  font-size: 1em;}
+
+span:hover {
+  text-decoration: underline;}
+
+aside {
+  background-color: #f2f2f2;
+  color: #738adb;
+  font-size: 120%;
+  border: 3px ridge;
+  border-radius: 10px;
+  overflow: auto;}
+
+th {
+  text-align: center;}
+
+td {
+  text-align: center;}
+
+.oText { 
+  max-width: 700px;}
+
+.page_content {
+  display: none;}
+
+.featured {
+  width: 350px;
+  height: 500px;}
+
+.comm_content {
+  display: none;
+  margin: 20px 10px;}
+
+.secret_comm {
+  color: #63df47;
+  font-size: 0;}
+
+.no_margin {
+  margin: 0;}
+
+.new {
+  margin: -22px -5px 0 -22px;
+  width: 32px;
+  height: 32px;}
+
+#invite {
+  width: 120px;
+  background-color: #f2f2f2;
+  border: 2px solid;
+  border-radius: 10px;
+  box-shadow: 0 0 3px #ffffff inset , 4px 4px 8px #000000 , 0 0 8px #4d57c2;}
+
+#invite_d:active {
+  transform: translateY(2px);}
+
+#pfp {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;}
