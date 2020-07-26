@@ -81,6 +81,10 @@ h3 {
 h5 {
   font-size: 1em;}
 
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;}
+
 span:hover {
   text-decoration: underline;}
 

@@ -1,5 +1,6 @@
 module.exports = {
   name: 'playrandost',
+  alias: ['pro'],
   guild: true,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     var vcChann = message.member.voice.channel

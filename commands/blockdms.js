@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'blockdms',
   use: 'blockdms <userID>',
+  alias: ['bdm'],
   args: 1,
   lock: 1,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
