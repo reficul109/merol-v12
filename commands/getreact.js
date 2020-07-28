@@ -4,7 +4,7 @@ module.exports = {
   keyreq: 35,
 	execute(Discord, client, message, caller, origin, msgAtt, embed, embed2, db, a, f, v) {
     client.cReact = db.prepare("UPDATE userData SET getReact = ?, customReact = ? WHERE userID = ?")
-    embed.addField('Custom reaction options', '<:y_:734130786520793129> = Enable custom react\n❌ = Disable custom react\nReact with **any** other emoji you want as custom reaction! (I must have access to it) (You will lose a key)\nIgnore this message to Cancel')
+    embed.addField('Custom reaction options', '<:y_:734130786520793129> = Enable your current custom react\n❌ = Disable your current custom react\nReact to this message with **any** other emoji you want as custom reaction to update! (I must have access to it) (You will lose a key)')
     embed.setColor(v.corrColor)
     origin.send(embed).then(function (nMessage) {
       nMessage.react("734130786520793129")
@@ -29,4 +29,4 @@ module.exports = {
           origin.send('Custom reaction updated.')}
         collector.stop()})
       collector.on('end', () => {
-        nMessage.reactions.removeAll()})})}}
+        if (message.guild) {nMessage.reactions.removeAll()}})})}}

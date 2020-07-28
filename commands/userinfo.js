@@ -17,4 +17,4 @@ module.exports = {
     embed.addField('Userdex (' + v.prefix + 'userdex)', user.DB.udexText)
     if (user.DB.udexImg !== 'None') {embed.setImage(user.DB.udexImg)}
     embed.setColor(v.corrColor)
-    origin.send(embed).catch(() => origin.send(embed.setImage(v.URL + 'bot/invbig.png')))}}
+    origin.send(embed).catch(() => origin.send(embed.setImage(v.URL + 'URL/invbig.png')))}}
