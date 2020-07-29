@@ -20,8 +20,8 @@ function checkKeys() {
     var audioSrc = document.getElementById("audio")
     var shopFrame = document.getElementById("shop")
     shopFrame.removeAttribute('onclick')
-    shopFrame.src = "https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2Fopeningbig.gif"
-    window.setTimeout(function() {shopFrame.src = "https://cdn.glitch.com/adeccad8-76de-48d5-97f9-6eb33d56efd4%2Fshoptstbig.png"}, 1571.42)
+    shopFrame.src = "https://merol-v12--reficul109.repl.co/page/openingbig.gif"
+    window.setTimeout(function() {shopFrame.src = "https://merol-v12--reficul109.repl.co/page/shoptstbig.png"}, 1571.42)
     audioSrc.volume = 0.25
     audioSrc.play()} 
   else {window.alert('Dont mess with the URL, cheater')}}
