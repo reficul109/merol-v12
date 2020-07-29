@@ -14,7 +14,7 @@ module.exports = {
     if (message.guild && message.guild.member(user)) {embed.addField('Joined', 'Discord: ' + user.createdAt.toDateString() + '\nThis Server: ' + message.guild.member(user).joinedAt.toDateString())}
     embed.addField('Keys (' + user.DB.getKeys + ')', '<a:lucky:541345931870732290>: ' + user.DB.keys)
     embed.addField('Custom React (' + user.DB.getReact + ')', link + user.DB.customReact)
-    embed.addField('Userdex (' + v.prefix + 'userdex)', user.DB.udexText)
+    embed.addField('Userdex (' + v.prefix + 'userdex, ' + v.prefix + 'userdex-i)', user.DB.udexText)
     if (user.DB.udexImg !== 'None') {embed.setImage(user.DB.udexImg)}
     embed.setColor(v.corrColor)
     origin.send(embed).catch(() => origin.send(embed.setImage(v.URL + 'URL/invbig.png')))}}

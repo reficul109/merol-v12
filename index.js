@@ -39,7 +39,8 @@ client.on('userUpdate', (oldUser, newUser) => {
     client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + colors[1].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[2].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[3].toString().substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
     collector.on('collect', cMessage => {
-      cMessage.member.roles.color.setColor(colors[parseInt(cMessage.content)].toString())
+      var numb = parseInt(cMessage.content)
+      if (numb) {cMessage.member.roles.color.setColor(colors[parseInt(cMessage.content)].toString())}
       collector.stop()
       cMessage.react("440574288160882688")})})}})
 
@@ -124,9 +125,7 @@ client.on('message', message => {
             artEmbed.setImage((Array.from(nMessage.attachments.values(), x => x.url)[0] || nMessage.content))
             artEmbed.setFooter('To make a message like this one, check the pins!')
             artEmbed.setColor(v.corrColor)
-            origin.send(artEmbed)})}}}
-
-  }
+            origin.send(artEmbed)})}}}}
 
   //Non-Prefix Ignore
   if (!message.content.toLowerCase().startsWith(v.prefix)) return;
@@ -164,7 +163,7 @@ client.on('message', message => {
   if (command.admin && !message.member.hasPermission('ADMINISTRATOR')) {return message.react('❌')}
 
   //Mod Lock
-  if (command.lock && !client.guilds.cache.get(v.srvrID).member(caller.id).roles.cache.find(role => role.id === v.modsID[command.lock])) {return message.react('❌')}
+  if (command.lock && !client.guilds.cache.get(v.srvrID).member(caller).roles.cache.find(role => role.id === v.modsID[command.lock])) {return message.react('❌')}
 
   try {
 
@@ -178,7 +177,7 @@ client.on('message', message => {
     if (command.thumbs) {message.react("440574288160882688")}
 
   } catch (error) {
-    console.error(error)
+    console.log('Trigger: ' + message.content + ' | ' + error)
 	  message.react("541339209986998277")}})
 
 //Token
