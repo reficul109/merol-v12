@@ -36,11 +36,11 @@ client.on('userUpdate', (oldUser, newUser) => {
   newUser.DB = client.modDB.get(newUser.id)
   if (newUser.DB && newUser.DB.mimicRole === 'Y') {
     getColors(newUser.displayAvatarURL({format: 'png', dynamic: true})).then(colors => {
-    client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + colors[1].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[2].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[3].toString().substring(1))
+    client.channels.cache.get("426520047301951509").send('<@' + newUser.id + '>, choose a color! [Reply "1", "2", etc...]\nhttps://encycolorpedia.com/' + colors[0].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[1].toString().substring(1) + '\nhttps://encycolorpedia.com/' + colors[2].toString().substring(1))
     const collector = new Discord.MessageCollector(client.channels.cache.get("426520047301951509"), m => m.author.id === newUser.id, {time: 600000})
     collector.on('collect', cMessage => {
       var numb = parseInt(cMessage.content)
-      if (numb) {cMessage.member.roles.color.setColor(colors[parseInt(cMessage.content)].toString())}
+      if (numb) {cMessage.member.roles.color.setColor(colors[--numb].toString())}
       collector.stop()
       cMessage.react("440574288160882688")})})}})
 
@@ -93,6 +93,7 @@ client.on('message', message => {
 
     //Lucky Keys
     if (v.keyIDs.some(word => message.id.endsWith(word))) {
+      return;
       if (caller.DB.getKeys === 'Y' && message.guild.DB.keysEnabled === 'Y') {
         var keysGot = f.randomObj(v.keyChances)
         caller.DB.keys+= keysGot

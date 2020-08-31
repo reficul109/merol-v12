@@ -52,7 +52,7 @@ function rng_flavors() {
   //Tetsu Speed
   document.getElementById("tetsu").scrollAmount = [Math.floor(Math.random() * 35 + 1)]
   //Main
-  if (document.URL === "https://merol-v12--reficul109.repl.co/") {
+  if (document.title == "Merol's Commands") {
     //JSON
     $.ajax({url: 'https://merol-v12--reficul109.repl.co/generalD.json', dataType: 'json', success: function(data) {
       document.getElementById("pfp").src = data.currIcon
