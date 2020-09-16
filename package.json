@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "discord.js": "^12.2.0",
-    "@discordjs/opus": "^0.1.0",
+    "@discordjs/opus": "^0.3.2",
     "express": "^4.17.1",
     "better-sqlite3": "^6.0.1",
     "yt-playlist-scraper": "^1.0.1",
