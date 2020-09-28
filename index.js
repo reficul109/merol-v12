@@ -9,7 +9,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => res.sendFile('./public/index.html'))
 app.listen(port, () => console.log('Listening at port ' + port))
 setInterval(() => {
-  http.get("http://merol-v12--reficul109.repl.co/")}, 280000)
+  http.get("https://merol-v12.herokuapp.com/")}, 280000)
 
 //Data Base
 const db = require('better-sqlite3')('./assets/data.db')
@@ -98,7 +98,7 @@ client.on('message', message => {
         var keysGot = f.randomObj(v.keyChances)
         caller.DB.keys+= keysGot
         client.cKeys.run(caller.DB.keys, caller.id)
-        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12! and Repl.it!**').catch(() => console.log(caller.id + ' Probably blocked the bot'))
+        caller.send('<a:lucky:541345931870732290> | You found **' + keysGot + '** lucky key(s)! **(Total: ' + caller.DB.keys + ')** - **Now using V12!**').catch(() => console.log(caller.id + ' Probably blocked the bot'))
       message.react("541345931870732290")}}
 
     //Reacts
