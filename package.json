@@ -11,7 +11,7 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": "8.4.0"
+    "node": "12.18.4"
   },
   "author": "Reficul",
   "license": "MIT",
