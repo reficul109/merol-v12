@@ -4,7 +4,7 @@ const a = require('./tools/arrays.json'), f = require('./tools/funcs.js'), v = r
 const client = new Discord.Client({presence: {status: 'online', activity: {name: f.randomObj(a.games)}}, disableMentions: 'everyone'})
 
 //Page
-var port = (proccess.env.PORT || 0)
+var port = (process.env.PORT || 0)
 app.use(express.static('public'))
 app.get('/', (req, res) => res.sendFile('./public/index.html'))
 app.listen(port, () => console.log('Listening at port ' + port))
