@@ -20,15 +20,15 @@ function checkKeys() {
     var audioSrc = document.getElementById("audio")
     var shopFrame = document.getElementById("shop")
     shopFrame.removeAttribute('onclick')
-    shopFrame.src = "https://merol-v12--reficul109.repl.co/page/openingbig.gif"
-    window.setTimeout(function() {shopFrame.src = "https://merol-v12--reficul109.repl.co/page/shoptstbig.png"}, 1571.42)
+    shopFrame.src = "https://raw.githubusercontent.com/reficul109/merol-v12/master/public/page/openingbig.gif"
+    window.setTimeout(function() {shopFrame.src = "https://raw.githubusercontent.com/reficul109/merol-v12/master/public/page/shoptstbig.png"}, 1571.42)
     audioSrc.volume = 0.25
     audioSrc.play()} 
   else {window.alert('Dont mess with the URL, cheater')}}
 
 function checkpass() {
   var pass = document.getElementById("pass")
-  $.ajax({url: 'https://merol-v12--reficul109.repl.co/generalD.json', dataType: 'json', success: function(data) {
+  $.ajax({url: 'https://merol-v12.herokuapp.com/generalD.json', dataType: 'json', success: function(data) {
   if (pass.value === data.modPass) {
     pass.style.backgroundColor = "#63df47"
     document.getElementById("are_you").innerHTML = '<h2> A few extra commands for mods have been unlocked </h2>'
@@ -54,7 +54,7 @@ function rng_flavors() {
   //Main
   if (document.title == "Merol's Commands") {
     //JSON
-    $.ajax({url: 'https://merol-v12--reficul109.repl.co/generalD.json', dataType: 'json', success: function(data) {
+    $.ajax({url: 'https://merol-v12.herokuapp.com/generalD.json', dataType: 'json', success: function(data) {
       document.getElementById("pfp").src = data.currIcon
       document.getElementById("userCount").innerHTML = data.nUsers
       document.getElementById("srvrCount").innerHTML = data.nServers}})
