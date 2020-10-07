@@ -9,7 +9,7 @@ app.use(express.static('public'))
 app.get('/', (req, res) => res.sendFile('./public/index.html'))
 app.listen(port, () => console.log('Listening at port ' + port))
 setInterval(() => {
-  http.get("https://merol-v12.herokuapp.com/")}, 280000)
+  http.get("http://merol-v12.herokuapp.com/")}, 280000)
 
 //Data Base
 const db = require('better-sqlite3')('./assets/data.db')
