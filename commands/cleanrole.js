@@ -1,5 +1,6 @@
 module.exports = {
 	name: 'cleanrole',
+  use: 'cleanrole <roleName>',
   alias: ['cr'],
   args: 1,
   lock: 2,
