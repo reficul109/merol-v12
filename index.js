@@ -102,9 +102,7 @@ client.on('message', message => {
       message.react("541345931870732290")}}
 
     //Reacts
-    if (message.id.endsWith("0")) {
-      if (caller.DB.getReact === 'Y' && caller.DB.customReact !== 'None') {message.react(caller.DB.customReact).catch(() => console.log(caller.id + ' Has a broken reaction'))}}
-
+    if (message.id.endsWith("0")) {message.react('763952663632150559')}
     //Wiki 
     if (message.guild === client.guilds.cache.get("396184349101260800")) {
       
